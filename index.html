@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income And Expense Service</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <link rel="stylesheet" href="node_modules/izitoast/dist/css/iziToast.min.css">
+</head>
+
+<body
+    onload="CreateTableWithLocalStorage();GetTotalIncomAndCostFromLocalSotrage();CreatChartWithDetails();CreatChartWithLocalStorage()">
+    <header>
+        <div class="container">
+            <section>
+                <h1>سیستم دخل و خرج داریا</h1>
+                <div class="utility">
+                    <!-- Import Svg -->
+                    <a href="" data-toggle="modal" data-target="#import-modal" id="import-data">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.292 29.184">
+                            <g id="share" transform="translate(0 -3.12)">
+                                <g id="Group_549" data-name="Group 549" transform="translate(14.305 3.12)">
+                                    <path id="Path_1832" data-name="Path 1832"
+                                        d="M81.389,6.356a.842.842,0,0,0-.841.841V27.392a.841.841,0,1,0,1.683,0V7.2A.841.841,0,0,0,81.389,6.356Z"
+                                        transform="translate(-80.548 -6.356)" fill-rule="evenodd" />
+                                </g>
+                                <g id="Group_550" data-name="Group 550" transform="translate(9.053 19.656)">
+                                    <path id="Path_1833" data-name="Path 1833"
+                                        d="M55.974,8.633a1.683,1.683,0,0,0,2.19,0l4.7-4.032a.841.841,0,1,0-1.1-1.278L58.164,6.416a1.683,1.683,0,0,1-2.19,0L52.365,3.323A.841.841,0,0,0,51.27,4.6Z"
+                                        transform="translate(-50.976 -3.121)" fill-rule="evenodd" />
+                                </g>
+                                <g id="Group_551" data-name="Group 551" transform="translate(0 15.475)">
+                                    <path id="Path_1834" data-name="Path 1834"
+                                        d="M0,74.372a1.683,1.683,0,0,1,1.683-1.683h5.89a.841.841,0,0,1,0,1.683H1.683V87.835H28.61V74.372h-5.89a.841.841,0,1,1,0-1.683h5.89a1.683,1.683,0,0,1,1.683,1.683V87.835a1.683,1.683,0,0,1-1.683,1.683H1.683A1.683,1.683,0,0,1,0,87.835Z"
+                                        transform="translate(0 -72.689)" />
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+
+                    <!-- Export Svg -->
+                    <a href="" data-toggle="modal" data-target="#export-modal" id="export-data"
+                        onclick="ExportTableData()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.292 29.184">
+                            <g id="share" transform="translate(0 -3.12)">
+                                <g id="Group_549" data-name="Group 549" transform="translate(14.305 3.695)">
+                                    <path id="Path_1832" data-name="Path 1832"
+                                        d="M81.389,28.234a.842.842,0,0,1-.841-.841V7.2a.841.841,0,1,1,1.683,0V27.392A.841.841,0,0,1,81.389,28.234Z"
+                                        transform="translate(-80.548 -6.356)" fill-rule="evenodd" />
+                                </g>
+                                <g id="Group_550" data-name="Group 550" transform="translate(9.053 3.12)">
+                                    <path id="Path_1833" data-name="Path 1833"
+                                        d="M55.974,3.526a1.683,1.683,0,0,1,2.19,0l4.7,4.032a.841.841,0,1,1-1.1,1.278L58.164,5.742a1.683,1.683,0,0,0-2.19,0L52.365,8.835a.841.841,0,0,1-1.1-1.278Z"
+                                        transform="translate(-50.976 -3.121)" fill-rule="evenodd" />
+                                </g>
+                                <g id="Group_551" data-name="Group 551" transform="translate(0 15.475)">
+                                    <path id="Path_1834" data-name="Path 1834"
+                                        d="M0,74.372a1.683,1.683,0,0,1,1.683-1.683h5.89a.841.841,0,0,1,0,1.683H1.683V87.835H28.61V74.372h-5.89a.841.841,0,1,1,0-1.683h5.89a1.683,1.683,0,0,1,1.683,1.683V87.835a1.683,1.683,0,0,1-1.683,1.683H1.683A1.683,1.683,0,0,1,0,87.835Z"
+                                        transform="translate(0 -72.689)" />
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="top">
+                <div class="main__right">
+                    <div class="select__box">
+                        <div class="select__box__income">
+                            <input type="radio" name="select" value="income" checked="checked" id="income-button">
+                            <label for="">درآمد</label>
+                        </div>
+                        <div class="select__box__cost">
+                            <input type="radio" name="select" value="cost" id="cost-button">
+                            <label for="">هزینه</label>
+                        </div>
+                    </div>
+                    <div class="amount__box">
+                        <label for="">مبلغ :</label>
+                        <input type="number" min="0" name="" id="amount-value" oninput="RealTimeTypeAmount()">
+                        <span id="amount-value-text"></span>
+                    </div>
+                    <div class="date__box">
+                        <label for="">تاریخ :</label>
+                        <div class="date__box__all">
+                            <input type="text" placeholder="روز" id="date-day-value">
+                            <input type="text" placeholder="ماه" id="date-month-value">
+                            <input type="text" placeholder="سال" id="date-year-value">
+                        </div>
+                    </div>
+                    <div class="description__box">
+                        <label for="">توضیحات :</label>
+                        <textarea name="" id="description-value"></textarea>
+                    </div>
+                    <div class="submit__box">
+                        <button id="record-info" onclick="CreateRecordTable()">
+                            ثبت دخل و خرج
+                        </button>
+                    </div>
+                </div>
+                <div class="main__left">
+                    <div class="income__cost__number">
+                        <div class="income__cost__number__right">
+                            <h3>درآمد</h3>
+                            <span id="income-text">0</span>
+                        </div>
+                        <div class="income__cost__number__left">
+                            <h3>مخارج</h3>
+                            <span id="expenditures-text">0</span>
+                        </div>
+                    </div>
+                    <div class="chart">
+                        <div id="main-chart"></div>
+                        <div class="chart__color__info">
+                            <span>درآمد</span>
+                            <span>هزینه</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="bottom">
+                <div class="statistics__table">
+                    <div class="header">
+                        <span>ردیف</span>
+                        <span>مبلغ</span>
+                        <span>تاریخ</span>
+                        <span>نوع هزینه</span>
+                        <span>توضیحات</span>
+                    </div>
+                    <div class="main" id="table-main">
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+    <!-- Modals -->
+
+    <!-- Description Modal -->
+    <div class="modal fade" id="description-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="description__modal__content">
+                    <div class="header">
+                        <span>توضیحات</span>
+                        <span data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10.607" height="10.607"
+                                viewBox="0 0 10.607 10.607">
+                                <g id="Group_547" data-name="Group 547"
+                                    transform="translate(-816.708 629.325) rotate(-45)">
+                                    <g id="Rectangle_220" data-name="Rectangle 220" transform="translate(1022 133)"
+                                        fill="#fff" stroke="#707070" stroke-width="1">
+                                        <rect width="1" height="14" rx="0.5" stroke="none" />
+                                        <rect x="0.5" y="0.5" height="13" />
+                                    </g>
+                                    <g id="Rectangle_221" data-name="Rectangle 221"
+                                        transform="translate(1029.5 139.5) rotate(90)" fill="#fff" stroke="#707070"
+                                        stroke-width="1">
+                                        <rect width="1" height="14" rx="0.5" stroke="none" />
+                                        <rect x="0.5" y="0.5" height="13" />
+                                    </g>
+                                </g>
+                            </svg>
+                            بستن
+                        </span>
+                    </div>
+                    <div class="content">
+                        <p id="description-content"></p>
+                    </div>
+                    <button data-dismiss="modal">بازگشت</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Description Modal -->
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="delete__modal__content">
+                    <div class="header">
+                        <span>حذف</span>
+                        <span data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10.607" height="10.607"
+                                viewBox="0 0 10.607 10.607">
+                                <g id="Group_547" data-name="Group 547"
+                                    transform="translate(-816.708 629.325) rotate(-45)">
+                                    <g id="Rectangle_220" data-name="Rectangle 220" transform="translate(1022 133)"
+                                        fill="#fff" stroke="#707070" stroke-width="1">
+                                        <rect width="1" height="14" rx="0.5" stroke="none" />
+                                        <rect x="0.5" y="0.5" height="13" />
+                                    </g>
+                                    <g id="Rectangle_221" data-name="Rectangle 221"
+                                        transform="translate(1029.5 139.5) rotate(90)" fill="#fff" stroke="#707070"
+                                        stroke-width="1">
+                                        <rect width="1" height="14" rx="0.5" stroke="none" />
+                                        <rect x="0.5" y="0.5" height="13" />
+                                    </g>
+                                </g>
+                            </svg>
+                            بستن
+                        </span>
+                    </div>
+                    <div class="content">
+                        <span>آیا مطمئن هستید؟</span>
+                    </div>
+                    <div class="modal__button">
+                        <button data-dismiss="modal" class="back">بازگشت</button>
+                        <button data-dismiss="modal" class="delete modal-delete-item-btn">حذف</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Modal -->
+
+    <!-- Import Modal -->
+    <div class="modal fade" id="import-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="import__modal__content">
+                    <div class="header">
+                        <span>وارد سازی</span>
+                        <span data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10.607" height="10.607"
+                                viewBox="0 0 10.607 10.607">
+                                <g id="Group_547" data-name="Group 547"
+                                    transform="translate(-816.708 629.325) rotate(-45)">
+                                    <g id="Rectangle_220" data-name="Rectangle 220" transform="translate(1022 133)"
+                                        fill="#fff" stroke="#707070" stroke-width="1">
+                                        <rect width="1" height="14" rx="0.5" stroke="none" />
+                                        <rect x="0.5" y="0.5" height="13" />
+                                    </g>
+                                    <g id="Rectangle_221" data-name="Rectangle 221"
+                                        transform="translate(1029.5 139.5) rotate(90)" fill="#fff" stroke="#707070"
+                                        stroke-width="1">
+                                        <rect width="1" height="14" rx="0.5" stroke="none" />
+                                        <rect x="0.5" y="0.5" height="13" />
+                                    </g>
+                                </g>
+                            </svg>
+                            بستن
+                        </span>
+                    </div>
+                    <div class="content">
+                        <textarea name="" id="import-data-value"></textarea>
+                    </div>
+                    <div class="modal__button">
+                        <button data-dismiss="modal" class="submit" onclick="ImporTabletData()">تایید</button>
+                        <button data-dismiss="modal" class="back">بازگشت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Import Modal -->
+
+    <!-- Export Modal -->
+    <div class="modal fade" id="export-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="export__modal__content">
+                    <div class="header">
+                        <span>خارج سازی</span>
+                        <span data-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10.607" height="10.607"
+                                viewBox="0 0 10.607 10.607">
+                                <g id="Group_547" data-name="Group 547"
+                                    transform="translate(-816.708 629.325) rotate(-45)">
+                                    <g id="Rectangle_220" data-name="Rectangle 220" transform="translate(1022 133)"
+                                        fill="#fff" stroke="#707070" stroke-width="1">
+                                        <rect width="1" height="14" rx="0.5" stroke="none" />
+                                        <rect x="0.5" y="0.5" height="13" />
+                                    </g>
+                                    <g id="Rectangle_221" data-name="Rectangle 221"
+                                        transform="translate(1029.5 139.5) rotate(90)" fill="#fff" stroke="#707070"
+                                        stroke-width="1">
+                                        <rect width="1" height="14" rx="0.5" stroke="none" />
+                                        <rect x="0.5" y="0.5" height="13" />
+                                    </g>
+                                </g>
+                            </svg>
+                            بستن
+                        </span>
+                    </div>
+                    <div class="content">
+                        <textarea name="" id="export-data-value"></textarea>
+                    </div>
+                    <div class="modal__button">
+                        <button data-dismiss="modal" class="back" id="back-export-modal">بازگشت</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Export Modal -->
+
+    <!-- Modals -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="node_modules/izitoast/dist/js/iziToast.min.js"></script>
+    <script src="node_modules/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>

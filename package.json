@@ -1,0 +1,16 @@
+{
+  "name": "income-expense-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ilia faramarzpour",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^2.9.3",
+    "izitoast": "^1.4.0",
+    "num2persian": "^3.2.1"
+  }
+}

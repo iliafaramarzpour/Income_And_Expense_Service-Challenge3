@@ -1,0 +1,915 @@
+@import "variable";
+@import "fonts";
+@import "mixins";
+
+* {
+  font-family: iranyekan;
+}
+
+body {
+  direction: rtl;
+  header {
+    width: 100%;
+    height: 200px;
+    background: url("../img/Header-Background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 2;
+    padding-top: 50px;
+    color: $white;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: linear-gradient(
+        rgba(41, 40, 40, 0.76) 0%,
+        rgba(49, 49, 49, 0.37) 100%
+      );
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    section {
+      display: flex;
+      justify-content: center;
+      position: relative;
+
+      h1 {
+        font-size: 33px;
+        font-weight: 800;
+        line-height: 57px;
+        @include mq(576) {
+          font-size: 25px;
+        }
+      }
+
+      .utility {
+        left: 0;
+        position: absolute;
+        @include mq(768) {
+          top: -30px;
+        }
+        a {
+          width: 30px;
+          height: 30px;
+          display: inline-block;
+          svg {
+            width: 100%;
+            height: 100%;
+            fill: $white;
+            cursor: pointer;
+          }
+          &:first-child {
+            margin-right: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  main {
+    position: relative;
+    top: -66px;
+    z-index: 3;
+    section.top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      @include mq(768) {
+        flex-direction: column;
+      }
+      .main__right {
+        width: calc(50% - 12.5px);
+        @include mq(768) {
+          width: 100%;
+        }
+        background-color: $white;
+        padding: 30px 40px 25px 40px;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
+        box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid $gray200;
+        .select__box {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 22px;
+          color: $gray800;
+          .select__box__income,
+          .select__box__cost {
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            display: flex;
+            align-items: center;
+            padding: 14px 11px 14px 0;
+            border: 1px solid $gray100;
+            width: 50%;
+            input[type="radio"] {
+              width: 27px;
+              height: 28px;
+            }
+            label {
+              margin: 0;
+              margin-right: 15px;
+              font-size: 17px;
+            }
+          }
+          .select__box__income {
+            margin-left: 17px;
+          }
+        }
+        .amount__box {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          label {
+            margin: 0;
+            color: $gray800;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+          }
+          input[type="number"] {
+            padding-right: 15px;
+            outline: none;
+            border: none;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            border: 1px solid $gray100;
+            width: 100%;
+            height: 55px;
+          }
+          input[type="number"] {
+            -moz-appearance: textfield;
+          }
+          input[type="number"]::-webkit-inner-spin-button,
+          input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          span {
+            margin-top: 13px;
+            font-size: 15px;
+            font-weight: bold;
+            background: linear-gradient(to left, $green400 0%, #000 100%);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+          }
+        }
+        .date__box {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          margin-top: 30px;
+          label {
+            font-size: 16px;
+            font-weight: bold;
+            color: $gray800;
+          }
+          .date__box__all {
+            display: flex;
+            input[type="text"] {
+              border: 1px solid $gray100;
+              width: calc(100% / 3);
+              height: 55px;
+              border-radius: 3px;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              -ms-border-radius: 3px;
+              -o-border-radius: 3px;
+              text-align: center;
+              outline: none;
+              &:nth-child(2) {
+                margin: 0 12px;
+              }
+              &::placeholder {
+                font-size: 16px;
+                font-weight: bold;
+                color: $gray400;
+              }
+            }
+          }
+        }
+        .description__box {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          margin-top: 17px;
+          label {
+            font-size: 16px;
+            font-weight: bold;
+            color: $gray800;
+          }
+          textarea {
+            width: 100%;
+            min-height: 100px;
+            max-height: 100px;
+            height: 100px;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            border: 1px solid $gray100;
+            outline: none;
+            resize: none;
+          }
+        }
+        .submit__box {
+          margin-top: 20px;
+          button {
+            width: 100%;
+            height: 60px;
+            border: none;
+            outline: none;
+            background: $green400;
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            color: $white;
+            font-size: 19px;
+            font-weight: bold;
+          }
+        }
+      }
+      .main__left {
+        width: calc(50% - 12.5px);
+        @include mq(768) {
+          width: 100%;
+          margin-top: 20px;
+        }
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -ms-border-radius: 8px;
+        -o-border-radius: 8px;
+        .income__cost__number {
+          display: flex;
+          background: $white;
+          border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+          -ms-border-radius: 8px;
+          -o-border-radius: 8px;
+          box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+          border: 1px solid $gray200;
+          margin-bottom: 25px;
+          .income__cost__number__right {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding-bottom: 27px;
+            h3 {
+              margin: 36px 0 20px 0;
+              font-size: 19px;
+              font-weight: bold;
+              color: $gray800;
+            }
+            span {
+              font-size: 23px;
+              font-weight: bold;
+              color: $green400;
+            }
+            &::after {
+              content: "";
+              display: inline-block;
+              border: 1px dashed $gray400;
+              position: absolute;
+              height: 100px;
+              left: 0;
+              top: 20px;
+            }
+          }
+          .income__cost__number__left {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 27px;
+            h3 {
+              margin: 36px 0 20px 0;
+              font-size: 19px;
+              font-weight: bold;
+              color: $gray800;
+            }
+            span {
+              font-size: 23px;
+              font-weight: bold;
+              color: $green400;
+            }
+          }
+        }
+        .chart {
+          border-radius: 8px;
+          -webkit-border-radius: 8px;
+          -moz-border-radius: 8px;
+          -ms-border-radius: 8px;
+          -o-border-radius: 8px;
+          box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.05);
+          border: 1px solid $gray200;
+          padding: 20px 0 10px 0;
+          height: 445px;
+
+          // #main-chart {
+          // }
+
+          .chart__color__info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              &::before {
+                content: "";
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                border-radius: 2px;
+                -webkit-border-radius: 2px;
+                -moz-border-radius: 2px;
+                -ms-border-radius: 2px;
+                -o-border-radius: 2px;
+                margin-left: 5px;
+              }
+              &:nth-child(1) {
+                margin-left: 20px;
+                &::before {
+                  background-color: $green400;
+                }
+              }
+              &:nth-child(2) {
+                &::before {
+                  background-color: $red400;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    section.bottom {
+      border: 1px solid $gray200;
+      box-shadow: 0px 1px 25px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+      .statistics__table {
+        .header {
+          border-radius: 8px 8px 0px 0px;
+          border: 1px solid $gray200;
+          box-shadow: 0px -3px 7px rgba(0, 0, 0, 0.04);
+          display: flex;
+          align-items: flex-start;
+          padding: 20px 40px 25px 132px;
+          background: $gray500;
+          @include mq(1200) {
+            padding: 20px 40px 25px 20px;
+          }
+          @include mq(576) {
+            padding: 20px 30px 25px 20px;
+          }
+          @include mq(512) {
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0 25px 0;
+          }
+          @include mq(376) {
+            align-items: center;
+            justify-content: center;
+            padding: 20px 5px 25px 5px;
+          }
+          span {
+            font-size: 16px;
+            font-weight: bold;
+            color: $gray800;
+            @include mq(335) {
+              font-size: 13px;
+            }
+            &:nth-child(1) {
+              margin-left: 102px;
+              @include mq(1200) {
+                margin-left: 79px;
+              }
+              @include mq(992) {
+                margin-left: 60px;
+              }
+              @include mq(768) {
+                margin-left: 40px;
+              }
+              @include mq(512) {
+                margin-left: 20px;
+              }
+              @include mq(376) {
+                margin-left: 10px;
+              }
+            }
+            &:nth-child(2) {
+              margin-left: 173px;
+              @include mq(1200) {
+                margin-left: 150px;
+              }
+              @include mq(992) {
+                margin-left: 100px;
+              }
+              @include mq(768) {
+                margin-left: 80px;
+              }
+              @include mq(512) {
+                margin-left: 40px;
+              }
+              @include mq(376) {
+                margin-left: 20px;
+              }
+            }
+            &:nth-child(3) {
+              margin-left: 174px;
+              @include mq(1200) {
+                margin-left: 150px;
+              }
+              @include mq(992) {
+                margin-left: 110px;
+              }
+              @include mq(768) {
+                margin-left: 50px;
+              }
+              @include mq(512) {
+                margin-left: 20px;
+              }
+              @include mq(376) {
+                margin-left: 15px;
+              }
+            }
+            &:nth-child(4) {
+              margin-left: 236px;
+              @include mq(1200) {
+                margin-left: 200px;
+              }
+              @include mq(992) {
+                margin-left: 60px;
+              }
+              @include mq(768) {
+                margin-left: 20px;
+              }
+              @include mq(512) {
+                margin-left: 20px;
+              }
+              @include mq(376) {
+                margin-left: 15px;
+              }
+            }
+          }
+        }
+        .main {
+          padding: 25px 50px 27px 30px;
+          @include mq(768) {
+            padding: 25px 50px 27px 20px;
+          }
+          @include mq(576) {
+            padding: 25px 30px 27px 20px;
+          }
+          @include mq(512) {
+            padding: 25px 0 27px 0;
+            justify-content: center;
+            align-items: center;
+          }
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+          .table__row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dashed $gray300;
+            padding-bottom: 20px;
+            margin-bottom: 19px;
+            .table__number {
+              font-size: 15px;
+              color: $gray800;
+              margin-left: 90px;
+              @include mq(1200) {
+                margin-left: 70px;
+              }
+              @include mq(992) {
+                margin-left: 40px;
+              }
+              @include mq(768) {
+                margin-left: 20px;
+              }
+              @include mq(512) {
+                margin-left: 10px;
+              }
+              @include mq(376) {
+                margin-left: 5px;
+              }
+            }
+            .table__amount {
+              color: $gray800;
+              font-size: 13px;
+              font-weight: 300;
+              margin-left: 124px;
+              span {
+                font-size: 15px;
+              }
+              @include mq(1200) {
+                margin-left: 100px;
+              }
+              @include mq(992) {
+                margin-left: 60px;
+              }
+              @include mq(768) {
+                margin-left: 40px;
+              }
+              @include mq(512) {
+                margin-left: 10px;
+              }
+              @include mq(376) {
+                margin-left: 5px;
+              }
+            }
+            .table__date {
+              font-size: 15px;
+              color: $gray800;
+              margin-left: 172px;
+              @include mq(1200) {
+                margin-left: 140px;
+              }
+              @include mq(992) {
+                margin-left: 100px;
+              }
+              @include mq(768) {
+                margin-left: 50px;
+              }
+              @include mq(512) {
+                margin-left: 20px;
+              }
+              @include mq(376) {
+                margin-left: 10px;
+              }
+            }
+            .table__type {
+              font-size: 15px;
+              margin-left: 232px;
+              @include mq(1200) {
+                margin-left: 200px;
+              }
+              @include mq(992) {
+                margin-left: 60px;
+              }
+              @include mq(768) {
+                margin-left: 10px;
+              }
+              @include mq(512) {
+                margin-left: 30px;
+              }
+              @include mq(376) {
+                margin-left: 12px;
+              }
+            }
+            .table__type.income {
+              color: $green400;
+            }
+            .table__type.cost {
+              color: $red400;
+            }
+            .table__description__button {
+              @include mq(512) {
+                display: flex;
+                flex-direction: column;
+              }
+              button {
+                border-radius: 4px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                -ms-border-radius: 4px;
+                -o-border-radius: 4px;
+                outline: none;
+                font-size: 13px;
+                border: none;
+                width: 50px;
+                height: 30px;
+                &:nth-child(1) {
+                  color: $white;
+                  background: $blue300;
+                  @include mq(512) {
+                    margin-bottom: 3px;
+                  }
+                }
+                &:nth-child(2) {
+                  color: $red300;
+                  background: $white;
+                  border: 1px solid $red300;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ///for Modals Style
+  .description__modal__content {
+    padding: 24px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 26px;
+      svg {
+        width: 14px;
+        height: 14px;
+        g {
+          fill: $gray800;
+        }
+      }
+      span {
+        color: $gray800;
+        &:nth-child(1) {
+          font-size: 16px;
+          font-weight: bold;
+        }
+        &:nth-child(2) {
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: 300;
+        }
+      }
+    }
+    .content {
+      margin-bottom: 55px;
+      p {
+        font-size: 14px;
+        line-height: 25px;
+        color: $gray800;
+        text-align: right;
+      }
+    }
+    button {
+      border: none;
+      outline: none;
+      width: 100%;
+      height: 60px;
+      background: $blue300;
+      color: $white;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      font-size: 19px;
+      font-weight: bold;
+    }
+  }
+
+  .delete__modal__content {
+    padding: 24px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 26px;
+      svg {
+        width: 14px;
+        height: 14px;
+        g {
+          fill: $gray800;
+        }
+      }
+      span {
+        color: $gray800;
+        &:nth-child(1) {
+          font-size: 16px;
+          font-weight: bold;
+        }
+        &:nth-child(2) {
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: 300;
+        }
+      }
+    }
+    .content {
+      margin-bottom: 55px;
+      display: flex;
+      justify-content: center;
+      font-size: 14px;
+      color: $gray800;
+    }
+    .modal__button {
+      display: flex;
+      justify-content: space-between;
+      button {
+        border: none;
+        outline: none;
+        width: calc(50% - 6px);
+        height: 60px;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        font-size: 19px;
+        font-weight: bold;
+      }
+      button.back {
+        background: $blue300;
+        color: $white;
+      }
+      button.delete {
+        background: $white;
+        color: $red300;
+        border: 1px solid $red300;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+      }
+    }
+  }
+  ///for more delete modal
+  #delete-modal {
+    .modal-dialog {
+      justify-content: center;
+      .modal-content {
+        width: 70%;
+      }
+    }
+  }
+
+  .import__modal__content {
+    padding: 24px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 43px;
+      svg {
+        width: 14px;
+        height: 14px;
+        g {
+          fill: $gray800;
+        }
+      }
+      span {
+        color: $gray800;
+        &:nth-child(1) {
+          font-size: 16px;
+          font-weight: bold;
+        }
+        &:nth-child(2) {
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: 300;
+        }
+      }
+    }
+    .content {
+      margin-bottom: 55px;
+      display: flex;
+      justify-content: center;
+      textarea {
+        font-size: 14px;
+        color: $gray800;
+        resize: none;
+        height: 137px;
+        max-height: 137px;
+        width: 100%;
+        border: none;
+        outline: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+        border: 1px solid $gray100;
+        padding: 10px;
+      }
+    }
+    .modal__button {
+      display: flex;
+      justify-content: space-between;
+      button {
+        border: none;
+        outline: none;
+        width: calc(50% - 6px);
+        height: 60px;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        font-size: 19px;
+        font-weight: bold;
+      }
+      button.submit {
+        background: $green400;
+        color: $white;
+      }
+      button.back {
+        background: $white;
+        color: $blue300;
+        border: 1px solid $blue300;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+      }
+    }
+  }
+
+  .export__modal__content {
+    padding: 24px;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 43px;
+      svg {
+        width: 14px;
+        height: 14px;
+        g {
+          fill: $gray800;
+        }
+      }
+      span {
+        color: $gray800;
+        &:nth-child(1) {
+          font-size: 16px;
+          font-weight: bold;
+        }
+        &:nth-child(2) {
+          cursor: pointer;
+          font-size: 13px;
+          font-weight: 300;
+        }
+      }
+    }
+    .content {
+      margin-bottom: 55px;
+      display: flex;
+      justify-content: center;
+      textarea {
+        font-size: 14px;
+        color: $gray800;
+        resize: none;
+        height: 137px;
+        max-height: 137px;
+        width: 100%;
+        border: none;
+        outline: none;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+        border: 1px solid $gray100;
+        padding: 10px;
+      }
+    }
+    .modal__button {
+      display: flex;
+      justify-content: space-between;
+      button {
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 60px;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        font-size: 19px;
+        font-weight: bold;
+      }
+      button.back {
+        background: $white;
+        color: $blue300;
+        border: 1px solid $blue300;
+        border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+      }
+    }
+  }
+}
